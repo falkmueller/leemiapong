@@ -1,0 +1,24 @@
+#
+# Apache/PHP/Drupal settings:
+#
+
+# Various rewrite rules.
+<IfModule mod_rewrite.c>
+  Options +FollowSymlinks
+	RewriteEngine on
+	
+  RewriteCond %{REQUEST_URI} !^/webservice(/|$)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule game(.*)$ server/index.php?q=$1 [L,QSA]
+	
+  RewriteCond %{REQUEST_URI} !^/webservice(/|$)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ client/index.php?q=$1 [L,QSA]
+
+</IfModule>
+
+php_value allow_call_time_pass_reference 1
+
+# $Id: .htaccess,v 1.90.2.5 2010/02/02 07:25:22 dries Exp $
