@@ -7,15 +7,15 @@
   Options +FollowSymlinks
 	RewriteEngine on
 	
-  RewriteCond %{REQUEST_URI} !^/webservice(/|$)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule game(.*)$ server/index.php?q=$1 [L,QSA]
 	
-  RewriteCond %{REQUEST_URI} !^/webservice(/|$)
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteRule ^(.*)$ client/index.php?q=$1 [L,QSA]
+
+  RewriteRule ^$ client/index.php?q=$1 [L,QSA]
 
 </IfModule>
 
