@@ -5,6 +5,9 @@ class gameObj {
 	//Wann zuletzt der ball bewegt wurde
 	public $lastBallMove = null;
 	
+	//Pfag, welches aussagt, dass Ball bereits bewegt wird
+	public $isBallMoved = false;
+	
 	//Koordinaten der Ballposition
 	public $ball = array(0,0);
 	
@@ -54,9 +57,8 @@ class gameObj {
 	}
 	
 	public function Get(){
-		$returnObj = $this;
+		$returnObj = clone $this;
 		$returnObj->players = array("left" => $this->players["left"]["name"], "right" => $this->players["right"]["name"]);
-		
 		return $returnObj;
 	}
 	

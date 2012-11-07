@@ -24,8 +24,8 @@ class game {
 	public function start(){
 		if (game::$game->status == statusEnum::$SSTATUS_FINISHED or game::$game->status == statusEnum::$STATUS_READY){
 			game::$game->status = statusEnum::$STATUS_READY;
+			game::$game->lastBallMove = time();
 			$this->resetBall();
-			$this->Save();
 		}
 		return "OK";
 	}
@@ -42,28 +42,21 @@ class game {
 	}
 	
 	private function GetGame($key){
-		if (file_exists("games/".$key)) {
-			$FileContent = 	file_get_contents("games/".$key);
-			return unserialize($FileContent);
-		} else {
+		
+		session_id($key);
+		session_start();
+		
+		if(!isset($_SESSION["game"])){
 			$GameObj = new gameObj();
-			$FileContent = serialize($GameObj);
-			$fh = fopen("games/".$key, 'w') or die("can't open file");
-			fwrite($fh, $FileContent);
-			fclose($fh);
-			return $GameObj;
-		}
+			$_SESSION["game"] = $GameObj;
+		} 
+		
+		return $_SESSION["game"];
+		
 	}
 	
 	public function GameObj() {
 		return game::$game;
-	}
-	
-	public function Save(){
-		$FileContent = serialize(game::$game);
-		$fh = fopen("games/".game::$key, 'w') or die("can't open file");
-		fwrite($fh, $FileContent);
-		fclose($fh);
 	}
 	
 	private function run(){
@@ -75,7 +68,7 @@ class game {
 		//wenn eine sekunge vergangen, dann Move counter zurücksetzen und lastmoveCounter reset auf aktuelles datum setzen
 			//TODO
 		
-		//wenn status = $STATUS_STARTED, dann stept errechnen (vergangene zeit seit letzten ballmove / $TIME_QUANTUM) und durchführen
+		//wenn status = $STATUS_STARTED and ballmoved = false, dann stept errechnen (vergangene zeit seit letzten ballmove / $TIME_QUANTUM) und durchführen
 			//TODO
 	}
 	

@@ -1,0 +1,35 @@
+	private function GetGame($key){
+		
+		session_id($key);
+		session_start();
+		
+		if(!isset($_SESSION["game"])){
+			$GameObj = new gameObj();
+			$_SESSION["game"] = $GameObj;
+		} 
+		
+		return $_SESSION["game"];
+		
+		//if (file_exists("games/".$key)) {
+		//	$FileContent = 	file_get_contents("games/".$key);
+		//	return unserialize($FileContent);
+		//} else {
+		//	$GameObj = new gameObj();
+		//	$FileContent = serialize($GameObj);
+		//	$fh = fopen("games/".$key, 'w') or die("can't open file");
+		//	fwrite($fh, $FileContent);
+		//	fclose($fh);
+		//	return $GameObj;
+		//}
+	}
+	
+	public function GameObj() {
+		return game::$game;
+	}
+	
+	public function Save(){
+		//$FileContent = serialize(game::$game);
+		//$fh = fopen("games/".game::$key, 'w') or die("can't open file");
+		//fwrite($fh, $FileContent);
+		//fclose($fh);
+	}

@@ -19,11 +19,9 @@ class player {
 			$gameObj->players["right"]["name"] = $Playername;
 			$gameObj->players["right"]["SecureKey"] = $Secret;
 			$gameObj->status = statusEnum::$STATUS_READY;
-			$game->resetBall();
+			$game->start();
 		}
-		
-		$game->Save();
-		
+			
 		return $Secret;
 	}
 	
@@ -77,8 +75,6 @@ class player {
 		} else {
 			$returnValue ="not your game";
 		}
-		
-		$game->Save();
 		
 		return $returnValue;
 	}
