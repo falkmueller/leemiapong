@@ -23,7 +23,10 @@
 			<a onclick="startGame();">Spiel starten</a>
 		</div>
 		<div class="bt">
-			<a onclick="SearchRival();">Gegner suchen</a>
+			<a onclick="SearchRival(this);">Gegner suchen</a>
+		</div>
+		<div id="SearchWaitIcon">
+			<img src='Client/layout/images/waitbutton.gif' />
 		</div>
 		<div style="clear: both;"></div>
 		</p>

@@ -42,23 +42,38 @@ function startGame(){
 	}
 }
 
-function SearchRival(){
+var isSearchRival = false;
+
+function SearchRival(btnCtrl){
 	if (ValidInput()){
-		$("#GameHost").prop('disabled', true);
-		$("#GameKey").prop('disabled', true);
-		$("#GameName").prop('disabled', true);
+		if (isSearchRival){
+			$("#GameHost").prop('disabled', false);
+			$("#GameKey").prop('disabled', false);
+			$("#GameName").prop('disabled', false);
+			
+			$("#SearchWaitIcon").hide();
+			isSearchRival = false;
+			$(btnCtrl).html("Gegner suchen")
+		} else {	
+			$("#GameHost").prop('disabled', true);
+			$("#GameKey").prop('disabled', true);
+			$("#GameName").prop('disabled', true);
 		
-		SeachRevalLoop();
+			isSearchRival = true;
+			$(btnCtrl).html("Abbrechen");
+			$("#SearchWaitIcon").show();
+			SeachRevalLoop();
+		}
 	}
 }
 
 function SeachRevalLoop(){
-		
+	
 	$.ajax({ url: "client/webservice.php", 
 			type: 'POST',
-	    	success: function(data){SeachRevalLoopFound(data);},
+	    	success: function(data){if(isSearchRival){SeachRevalLoopFound(data);}},
 	        data: {key: $("#GameKey").val(), SearchPlayer: 1}, 
-	        error:  function(res,textStatus,errorThrown){SeachRevalLoop();},
+	        error:  function(res,textStatus,errorThrown){if(isSearchRival){SeachRevalLoop();}},
 	        timeout: 30000 });
 }
 

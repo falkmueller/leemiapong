@@ -103,6 +103,12 @@ visibility: visible;
  margin-right: 10px;
 }
 
+.start #SearchWaitIcon {
+	margin-top: 8px;
+	float: left;
+	display: none;
+}
+
 /*####################Spielfeld############################################*/
 
 #Field {

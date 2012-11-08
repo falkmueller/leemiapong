@@ -53,7 +53,8 @@ class player {
 		$returnValue = "OK";
 		
 		if ($gameObj->players["right"]["SecureKey"] == $SecureKey){
-			if ($config->FIELD_HEIGHT < ($gameObj->paddleRight + $distance)){
+			if ($config->FIELD_HEIGHT < ($gameObj->paddleRight + $distance) ||
+				($gameObj->paddleRight + $distance) < 0){
 				$returnValue ="leave gamearea";
 			}
 			elseif ($gameObj->rightMoveCounter > $config->NUMBER_OF_PADDLE_MOVES){
@@ -63,7 +64,8 @@ class player {
 				$gameObj->paddleRight = $gameObj->paddleRight + $distance;
 			}
 		} elseif ($gameObj->players["left"]["SecureKey"] == $SecureKey){
-			if ($config->FIELD_HEIGHT < ($gameObj->paddleLeft  + $distance)){
+			if ($config->FIELD_HEIGHT < ($gameObj->paddleLeft  + $distance)||
+				($gameObj->paddleLeft + $distance) < 0){
 				$returnValue ="leave gamearea";
 			}
 			elseif ($gameObj->leftMoveCounter > $config->NUMBER_OF_PADDLE_MOVES){

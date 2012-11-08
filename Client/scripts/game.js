@@ -41,6 +41,29 @@ function FirstStart(){
 	CallStart();
 	//Longpolling Starten
 	StartStatusLoop();
+
+	//Tastaturtrigger setzen
+
+	$(window).keypress(function(event) {return CheckKeyPressEvent(event);});
+
+}
+
+function CheckKeyPressEvent(event){
+
+	if(event.keyCode == 38){
+		paddleUp();
+		return false;
+	}
+	else if (event.keyCode == 40){
+		paddleDown();
+		return false;
+	}
+	else if (event.keyCode == 83){
+		restart();
+		return false;
+	}
+	
+	return true;
 }
 
 function StartStatusLoop(){
@@ -63,13 +86,22 @@ function UpdateStatus(data){
 	$('#nameRight').text(data['players']['right']);
 	
 	//Punkte setzen
+	var hasMakePoint = false;
+	if ( $('#pointsLeft').text() != data['scoreLeft'] ||
+			$('#pointsRight').text() != data['scoreRight']){
+		hasMakePoint = true;
+	}
 	$('#pointsLeft').text(data['scoreLeft']);
 	$('#pointsRight').text(data['scoreRight']);
 	
 	//ball setzen 
-	//$('#ball').css('left', data['ball']['0'] - ballRadius);
-	//$('#ball').css('bottom', data['ball']['1'] - ballRadius);
-	$('#ball').animate({left: data['ball']['0'] - ballRadius, bottom: data['ball']['1'] - ballRadius}, LoopWait);
+	if (hasMakePoint) {
+		$('#ball').css('left', data['ball']['0'] - ballRadius);
+		$('#ball').css('bottom', data['ball']['1'] - ballRadius);
+	} else {
+		$('#ball').animate({left: data['ball']['0'] - ballRadius, bottom: data['ball']['1'] - ballRadius}, LoopWait);	
+	}
+	
 	//Paddel setzen
 	$('#paddleLeft').css('bottom', (data['paddleLeft'] - PaddelHight /2));
 	$('#paddleRight').css('bottom', (data['paddleRight'] - PaddelHight /2));
@@ -77,9 +109,17 @@ function UpdateStatus(data){
 
 	if (data["status"] == "finished"){
 		runStatusLoop = false;
-		//TODO: Nachricht wer gewonnen hat und button zum CallStart
+		var WinPlayerName = (data['scoreLeft'] > data['scoreRight']) ? data['players']['left'] : data['players']['right'];
+		$.blockUI({ message: "Spieler " + WinPlayerName + " hat gewonnen.<br/><a onclick='restart()'>Neues Spiel</a>"});
 	}
 
+}
+
+function restart(){
+	runStatusLoop = true;
+	CallStart();
+	$.unblockUI();
+	StartStatusLoop();
 }
 
 function Callconfig(){
