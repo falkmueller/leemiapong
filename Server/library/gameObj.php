@@ -5,9 +5,6 @@ class gameObj {
 	//Wann zuletzt der ball bewegt wurde
 	public $lastBallMove = null;
 	
-	//Pfag, welches aussagt, dass Ball bereits bewegt wird
-	public $isBallMoved = false;
-	
 	//Koordinaten der Ballposition
 	public $ball = array(0,0);
 	
@@ -51,8 +48,8 @@ class gameObj {
 			$this->ball = array($config->FIELD_WIDTH / 2 , $config->FIELD_HEIGHT / 2);
 			$this->paddleLeft = $config->FIELD_HEIGHT / 2;
 			$this->paddleRight = $config->FIELD_HEIGHT / 2;
-			$this->lastBallMove = time();
-			$this->LastMoveCounterReset = time();
+			$this->lastBallMove = round(microtime(true)*1000);
+			$this->LastMoveCounterReset = round(microtime(true)*1000);
 			$this->status = statusEnum::$STATUS_LOGIN;
 	}
 	
