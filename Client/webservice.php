@@ -30,5 +30,30 @@ function GetContentFromHash($hash){
 	 }
 }
 
+function CreateKey(){
+		$secret = "";
+    	$possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    	
+    	for ($i = 0; $i < 8; $i++) {
+    		$secret .= $possible[rand(0, strlen($possible))];
+    	}
+    	
+    	return $secret;
+	}
+	
+function WSURL() {
+ $pageURL = 'http';
+ if (isset($_SERVER["HTTPS"])) {if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}}
+ $pageURL .= "://";
+ if ($_SERVER["SERVER_PORT"] != "80") {
+  $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
+ } else {
+  $pageURL .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
+ }
+ 
+ $pageURL = substr($pageURL, 0, strpos($pageURL, "/client"));
+ $pageURL = $pageURL."/game";
+ return $pageURL;
+}
 
 		

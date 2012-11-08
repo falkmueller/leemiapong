@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="client/layout/styles.css" media="all" />
 
 <script type="text/javascript" src="client/scripts/jquery-1.8.2.min.js" ></script>
+<script type="text/javascript" src="client/scripts/jquery.blockUI.js" ></script>
 <script type="text/javascript" src="client/scripts/start.js" ></script>
 </head>
 <body onload="WindowLoadEvent();">

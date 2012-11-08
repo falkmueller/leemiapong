@@ -80,6 +80,29 @@ visibility: visible;
 	width: 350px;
 }
 
+.bt a, .bt a:ACTIVE, .bt a:VISITED {
+	display: block;
+	height: 30px;
+	background-color: #595959;
+	color: #FFF;
+	line-height: 30px;
+	width: 150px;
+	text-indent: 10px;
+	text-decoration: none;
+	border:  1px solid #333;
+}
+
+.bt a:HOVER {
+	cursor: pointer;
+	color: #595959;
+	background-color: #FFF;
+}
+
+.start .bt {
+ float: left;
+ margin-right: 10px;
+}
+
 /*####################Spielfeld############################################*/
 
 #Field {
