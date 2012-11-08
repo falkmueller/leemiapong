@@ -31,10 +31,10 @@
 	<div class="right"> 
 		<p>
 			Du willst mal wieder klassisches Pong spielen? Dann bist du hier genau richtig.<br/>
-			trage einfach deinen Namen ein und drücke "Genger suchen".<br/>
+			trage einfach deinen Namen ein und dr&uuml;cke "Genger suchen".<br/>
 		</p>
 		<p>
-			Wenn du mit einem Freund Spielen willst, dann trage den Game-Kay deines Kumpels ein und drücke "Spiel starten".<br/>
+			Wenn du mit einem Freund Spielen willst, dann trage den Game-Kay deines Kumpels ein und dr&uuml;cke "Spiel starten".<br/>
 			Du kannst auch selbst ein Spiel starten und einen Freund deinen Game-Key mitteilen.
 		</p>
 	</div>

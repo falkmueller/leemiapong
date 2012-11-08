@@ -74,8 +74,9 @@ class game {
 		
 		//Wenn wartezeit vorbei ($lastBallMove < now + $WAIT_BEFORE_START), dann status = $STATUS_STARTED
 		if (game::$game->status == statusEnum::$STATUS_READY){
-			if (game::$game->lastBallMove < time() - $config->WAIT_BEFORE_START){
+			if (game::$game->lastBallMove < round(microtime(true)*1000) - $config->WAIT_BEFORE_START){
 			game::$game->status = statusEnum::$STATUS_STARTED;
+			game::$game->lastBallMove = round(microtime(true)*1000);
 			}
 		}
 		
@@ -118,7 +119,7 @@ class game {
 				//wenn ball nicht anpaddel
 				$this->resetBall();
 				game::$game->scoreLeft++;
-				CheckWinner($config);
+				$this->CheckWinner($config);
 				return;
 			}
 		}
@@ -139,14 +140,14 @@ class game {
 				//wenn ball nicht anpaddel
 				$this->resetBall();
 				game::$game->scoreRight++;
-				CheckWinner($config);
+				$this->CheckWinner($config);
 				return;
 			}
 		}
 		
 		//3. wenn ball an den oberen oder unteren Spielfeldrand ist
 		if (game::$game->ball[1] >= $config->FIELD_HEIGHT - $config->BALL_RADIUS or 
-			game::$game->ball[1] <= $$config->BALL_RADIUS){
+			game::$game->ball[1] <= $config->BALL_RADIUS){
 			game::$game->ballDelta[1] = game::$game->ballDelta[1] * (-1);
 		}
 		

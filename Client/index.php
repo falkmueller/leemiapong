@@ -9,6 +9,7 @@
 <script type="text/javascript" src="client/scripts/jquery-1.8.2.min.js" ></script>
 <script type="text/javascript" src="client/scripts/jquery.blockUI.js" ></script>
 <script type="text/javascript" src="client/scripts/start.js" ></script>
+<script type="text/javascript" src="client/scripts/game.js" ></script>
 </head>
 <body onload="WindowLoadEvent();">
 	<div class="PageWrapper">

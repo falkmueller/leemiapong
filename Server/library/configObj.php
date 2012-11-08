@@ -5,10 +5,10 @@ class configObj {
 	//Fielfeldhöhe
 	public $FIELD_HEIGHT = 500;
 	//SpielfeldBreite
-	public $FIELD_WIDTH = 500;
+	public $FIELD_WIDTH = 800;
 	
 	//Radius des Balls
-	public $BALL_RADIUS = 5;
+	public $BALL_RADIUS = 20;
 	
 	//höhe der Paddel
 	public $PADDLE_HEIGHT = 80;

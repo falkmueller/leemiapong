@@ -30,7 +30,7 @@ class player {
     	$possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     	
     	for ($i = 0; $i < 5; $i++) {
-    		$secret .= $possible[rand(0, strlen($possible))];
+    		$secret .= $possible[rand(0, strlen($possible)-1)];
     	}
     	
     	return $secret;

@@ -4,6 +4,7 @@ function LoadPage(hash){
 			  type: 'POST',
 			  url: "client/webservice.php",
 			  data: {hash: hash},
+			  dataType: "html",
 			  success: function(res){ShowContent(res)},
 			  error:  function(res,textStatus,errorThrown){ if (window.location.hostname == 'localhost') { alert(textStatus+": "+errorThrown); alert(res);}}
 		});
@@ -14,7 +15,7 @@ function LoadPage(hash){
 
 function ShowContent(cont){
 	$("#Content").html(cont);
-	$("#Content").slideDown("slow", function(){SetInacticeCusor();});
+	$("#Content").slideDown("slow", function(){SetInacticeCusor();checkGameStart();});
  
 }
 
@@ -34,7 +35,7 @@ function WindowLoadEvent(){
 }
 
 function startGame(){
-	
+
 	if (ValidInput()){
 		window.location.hash = "game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val();
 		LoadPage("#game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val());
@@ -52,32 +53,36 @@ function SearchRival(){
 }
 
 function SeachRevalLoop(){
-	//TODO: schleife zum finden von gegner
-	//bei erfolg SeachRevalLoopFound(Key)
-	SeachRevalLoopFound("falk");
+		
+	$.ajax({ url: "client/webservice.php", 
+			type: 'POST',
+	    	success: function(data){SeachRevalLoopFound(data);},
+	        data: {key: $("#GameKey").val(), SearchPlayer: 1}, 
+	        error:  function(res,textStatus,errorThrown){SeachRevalLoop();},
+	        timeout: 30000 });
 }
 
 function SeachRevalLoopFound(Key){
-	ShopMessage("Sie werden nun verbunden.");
+	ShowMessage("Sie werden nun verbunden.");
 	$("#GameKey").val(Key);
 	startGame();
 }
 
 function ValidInput(){
 	//Prügen das kein Istgleich in den angaben
-	$("#GameHost").val($("#GameHost").val().replace('=',''));
-	$("#GameKey").val($("#GameKey").val().replace('=',''));
-	$("#GameName").val($("#GameName").val().replace('=',''));
+	$("#GameHost").val($("#GameHost").val().replace('=','').replace('&','').replace('?','').replace('#',''));
+	$("#GameKey").val($("#GameKey").val().replace(/[^a-z0-9]/gi,''));
+	$("#GameName").val($("#GameName").val().replace('=','').replace('&','').replace('?','').replace('#',''));
 
 	//Prüfen ob alle angeaben gemacht sind
-	if ($("#GameHost").val() == ""){ShopMessage("Bitte geben Sie einen Host an."); return false;}
-	if ($("#GameKey").val() == ""){ShopMessage("Bitte geben Sie einen Key an."); return false;}
-	if ($("#GameName").val() == ""){ShopMessage("Bitte geben Sie Ihren Namen an."); return false;}
+	if ($("#GameHost").val() == ""){ShowMessage("Bitte geben Sie einen Host an."); return false;}
+	if ($("#GameKey").val() == ""){ShowMessage("Bitte geben Sie einen Key an."); return false;}
+	if ($("#GameName").val() == ""){ShowMessage("Bitte geben Sie Ihren Namen an."); return false;}
 	
 	return true;
 }
 
-function ShopMessage(mes){
+function ShowMessage(mes){
 	$.blockUI({ message: mes });
-	setTimeout("$.unblockUI()", 1000);
+	setTimeout("$.unblockUI()", 1500);
 }
