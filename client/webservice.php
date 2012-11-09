@@ -55,19 +55,11 @@ function GetContentFromHash($hash){
 			$hash = substr($hash, 1);
 		}
 	}
+	$hash = "#".$hash;
 	
-	$url = parse_url($hash);
-	
-	$Page=$url["path"];
-	$Parameter = array();
-	
-	if (isset($url["query"])) {
-	$Parameter = $url["query"];
-	}
-	
-	 if ($Page == "info"){
+	 if (preg_match("/#info/i", $hash)){
 	 	include 'sites/information.php';
-	 } elseif ($Page == "game" and isset($Parameter["key"]) and isset($Parameter["name"]))
+	 } elseif (preg_match("/#game/i", $hash))
 	 {
 	 	include 'sites/client.php';
 	 } else {
@@ -87,6 +79,7 @@ function CreateKey(){
 	}
 	
 function WSURL() {
+	
  $pageURL = 'http';
  if (isset($_SERVER["HTTPS"])) {if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}}
  $pageURL .= "://";

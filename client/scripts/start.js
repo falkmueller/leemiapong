@@ -48,7 +48,7 @@ function SearchRival(btnCtrl){
 	if (ValidInput()){
 		if (isSearchRival){
 			$("#GameHost").prop('disabled', false);
-			$("#GameKey").prop('disabled', false);
+			$("#pKey").show();
 			$("#GameName").prop('disabled', false);
 			
 			$("#SearchWaitIcon").hide();
@@ -56,7 +56,7 @@ function SearchRival(btnCtrl){
 			$(btnCtrl).html("Gegner suchen")
 		} else {	
 			$("#GameHost").prop('disabled', true);
-			$("#GameKey").prop('disabled', true);
+			$("#pKey").hide();
 			$("#GameName").prop('disabled', true);
 		
 			isSearchRival = true;

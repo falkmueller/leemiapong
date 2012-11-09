@@ -10,7 +10,7 @@
 			Game-Host:<br/>
 			<input type="text" value="<?php echo $Host; ?>" id="GameHost" />
 		</p>
-		<p>
+		<p id="pKey">
 			Game-Key:<br/>
 			<input type="text" value="<?php echo $Key; ?>" id="GameKey" />
 		</p>
@@ -26,7 +26,7 @@
 			<a onclick="SearchRival(this);">Gegner suchen</a>
 		</div>
 		<div id="SearchWaitIcon">
-			<img src='Client/layout/images/waitbutton.gif' />
+			<img src='client/layout/images/waitbutton.gif' />
 		</div>
 		<div style="clear: both;"></div>
 		</p>

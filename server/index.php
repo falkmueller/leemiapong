@@ -1,5 +1,5 @@
 <?php 
-//Falk einkommentieren:error_reporting(0);
+error_reporting(0);
 
 function autoloader($ClassName){
 	$ClassName = str_replace("_", "/", $ClassName);
@@ -43,7 +43,7 @@ if (!function_exists('json_encode')) {
  * #############################################################
  */
 
-$response = new Response($_GET["q"]);
+$response = new response($_GET["q"]);
 $response->send();
 
 ?>
