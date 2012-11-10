@@ -62,13 +62,14 @@ visibility: visible;
 /*####################Startseite###########################################*/
 .start .left {
 	float: left;
-	width: 395px;
-	border-right: 5px solid #fff;
+	width: 370px;
 }
 
 .start .right {
 	float: right;
-	width: 390px;
+	width: 400px;
+	padding-left: 20px;
+	border-left: 5px solid #fff;
 }
 
 .start h2 {
@@ -99,13 +100,16 @@ visibility: visible;
 }
 
 .start .bt {
- float: left;
  margin-right: 10px;
 }
 
 .start #SearchWaitIcon {
 	margin-top: 8px;
 	float: left;
+	display: none;
+}
+
+.start #pPlayer2 {
 	display: none;
 }
 
@@ -175,10 +179,6 @@ visibility: visible;
     -khtml-border-radius : 50%; /* Linux browsers */
     border-radius : 50%; /* CSS3 compatible browsers */
     
-    background : -moz-linear-gradient(top,  #FFF,  #CCC); /* Firefox 3.6+ */
-    background : -webkit-gradient(linear, left top, left bottom, from(#FFF), to(#CCC)); /* Safari & Chrome */
-    filter : progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#CCC'); /* IE 5.5 - 7 */
-    -ms-filter : "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF0000FF, endColorstr=#FFFFFFFF)"; /* IE 8 */
     
 }
 
@@ -201,18 +201,43 @@ right: 5px;
 bottom: 50%;
 }
 
-.pointer {
-	float: right;
-	
+.Legend {
+	text-align: center;
+	margin-top: 10px;
 }
 
-.pointer a {
-	margin-top: 10px;
+#PlayerLegend {
+	float: right;
+}
+	
+#Player2Legend {
+	float:left;
+	/*display: none;*/
+}
+
+.PlayerLegend {
 	display: block;
-	border: 1px solid #595959;
-	width: 60px;
-	height: 30px;
-	line-height:  30px;
+	height: 90px;
+	width: 45px;
+}
+
+.PlayerLegend a {
+	display: block;
 	cursor: pointer;
-	text-align: center;
+	width: 40px;
+	height: 40px;
+	background-image: url('images/keys.png');
+	margin-bottom: 5px;
+}
+
+#PlayerLegend .down {
+	background-position: -40px 0;
+}
+
+#Player2Legend .up {
+	background-position: 0 40px;
+}
+
+#Player2Legend .down {
+	background-position: -40px 40px;
 }

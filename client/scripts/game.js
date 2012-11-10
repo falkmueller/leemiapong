@@ -5,10 +5,17 @@ var SecretKey;
 var runStatusLoop = false;
 var LoopWait = 100;
 
+var Name2 = false;
+var SecretKey2 = false;
+
 var PaddelHight;
 var ballRadius;
 
 function checkGameStart(){
+	
+	Name2 = false;
+	SecretKey2 = false;
+	
 	var hash = window.location.hash;
 	runStatusLoop = false;
 	
@@ -16,6 +23,7 @@ function checkGameStart(){
 	
 		Host = getParam("host");
 		Name = getParam("name");
+		Name2 = getParam("name2");
 		GameKey = getParam("key");
 		
 		if(Host && Name && GameKey) {
@@ -36,6 +44,13 @@ function FirstStart(){
 	//Spielfeld an Konfigurationsdaten anpassen
 	Callconfig();
 	//login
+	if (Name2){CallLoginPlayer2();}
+	else {
+		$('#Player2Legend').hide();
+		$('#PlayerLegend').css('float','none');
+		$('#PlayerLegend').css('margin','0 auto');
+		}
+	
 	CallLogin();
 	//starten
 	CallStart();
@@ -48,17 +63,35 @@ function FirstStart(){
 
 }
 
-function CheckKeyPressEvent(event){
+function CheckKeyPressEvent(evt){
+	
+		var keyCode;
+		if (!evt) var evt = window.event
+		if (evt.which) keyCode = evt.which;
+		else if (evt.keyCode) keyCode = evt.keyCode;
+	
+		console.log(evt);
 
-	if(event.keyCode == 38){
-		paddleUp();
+	if(keyCode == 38){
+		//Key UP
+		paddleUp(1);
 		return false;
 	}
-	else if (event.keyCode == 40){
-		paddleDown();
+	else if (keyCode == 40){
+		//key down
+		paddleDown(1);
 		return false;
+	} 
+	else if (keyCode == 119){
+		//Letter 'w'
+		paddleUp(2);
 	}
-	else if (event.keyCode == 83){
+	else if (keyCode == 115){
+		//Letter 's'
+		paddleDown(2);
+	}
+	else if (keyCode == 82){
+		// Letter 'r'
 		restart();
 		return false;
 	}
@@ -90,6 +123,7 @@ function UpdateStatus(data){
 	if ( $('#pointsLeft').text() != data['scoreLeft'] ||
 			$('#pointsRight').text() != data['scoreRight']){
 		hasMakePoint = true;
+		try {$("#beep-one")[0].play();} catch (e) {}
 	}
 	$('#pointsLeft').text(data['scoreLeft']);
 	$('#pointsRight').text(data['scoreRight']);
@@ -99,6 +133,7 @@ function UpdateStatus(data){
 		$('#ball').css('left', data['ball']['0'] - ballRadius);
 		$('#ball').css('bottom', data['ball']['1'] - ballRadius);
 	} else {
+		//ball bewegen
 		$('#ball').animate({left: data['ball']['0'] - ballRadius, bottom: data['ball']['1'] - ballRadius}, LoopWait);	
 	}
 	
@@ -138,6 +173,14 @@ function CallLogin(){
     });
 }
 
+function CallLoginPlayer2(){
+	$.ajax({ url: Host + "/" + GameKey + "/player/" + Name2,
+	success: function(data){if (data != "Game full"){SecretKey2 = data;}},
+	async: false,
+	dataType: "json"
+    });
+}
+
 function CallStart(){
 	$.ajax({ url: Host + "/" + GameKey + "/start",
 	async: false
@@ -166,14 +209,16 @@ function SetConfig(data){
 	ballRadius = data['BALL_RADIUS'];
 }
 
-function paddleUp(){
-	$.ajax({ url: Host + "/" + GameKey + "/player/" + Name + "/" + SecretKey + "/up",
-    });
+function paddleUp(Player){
+	if (Player == 2){$.ajax({ url: Host + "/" + GameKey + "/player/" + Name2 + "/" + SecretKey2 + "/up"});}
+	else {$.ajax({ url: Host + "/" + GameKey + "/player/" + Name + "/" + SecretKey + "/up"});}
+	
 }
 
-function paddleDown(){
-	$.ajax({ url: Host + "/" + GameKey + "/player/" + Name + "/" + SecretKey + "/down",
-    });
+function paddleDown(Player){
+	if (Player == 2){$.ajax({ url: Host + "/" + GameKey + "/player/" + Name2 + "/" + SecretKey2 + "/down"});}
+	else {$.ajax({ url: Host + "/" + GameKey + "/player/" + Name + "/" + SecretKey + "/down"});}
+
 }
 
 function getParam(variable){ 
@@ -184,3 +229,4 @@ function getParam(variable){
             if(pair[0] == variable){return pair[1];}
        }       return(false);
 }
+ 

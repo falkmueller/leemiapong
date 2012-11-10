@@ -1,8 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title>Pong</title>
+<meta name="fragment" content="!">
 
 <link rel="stylesheet" type="text/css" href="client/layout/styles.css" media="all" />
 
@@ -20,6 +21,14 @@
 		
 		<div id="Content">
 		<!-- Load per AJAX -->
+		<!-- Falls Crawer von Suchmaschine BEGIN-->
+		<?php
+		if(isset($_GET["_escaped_fragment_"])){
+			include 'webservice.php';
+			echo GetContentFromHash($_GET["_escaped_fragment_"]);
+		}		
+		?>
+		<!-- Falls Crawer von Suchmaschine END-->
 		</div>
 		<div id="footer">
 			Dieses Pong Spiel entstand im Rahmen des <a target="_blank" href="http://www.coding-contest.de/">Coding Contest 2012</a>
@@ -35,5 +44,17 @@
 			</div>
 		</div>
 	</div>
+	
+	<div style="display: none;">
+		<audio id="beep-one" controls preload="auto">
+			<source src="client/sounds/BLOOP.mp3" controls></source>
+			<source src="client/sounds/BLOOP.ogg" controls></source>
+		</audio>
+			<audio id="pageLoad" controls preload="auto">
+			<source src="client/sounds/CAMERAC.mp3" controls></source>
+			<source src="client/sounds/CAMERAC.ogg" controls></source>
+		</audio>
+	</div>
+
 </body>
 </html>

@@ -1,4 +1,5 @@
 function LoadPage(hash){
+	try {$("#pageLoad")[0].play();} catch (e) {}
 	$("#Content").slideUp("fast", function(){
 		 $.ajax({
 			  type: 'POST',
@@ -14,8 +15,14 @@ function LoadPage(hash){
 }
 
 function ShowContent(cont){
+	
 	$("#Content").html(cont);
-	$("#Content").slideDown("slow", function(){SetInacticeCusor();checkGameStart();});
+	$("#Content").slideDown("slow", function(){SetInacticeCusor();
+												$('#Content a[href^="#"]').click( function(){SetActiceCusor(); 
+												LoadPage($(this).attr("href"));
+												})
+												checkGameStart();
+												});
  
 }
 
@@ -37,8 +44,13 @@ function WindowLoadEvent(){
 function startGame(){
 
 	if (ValidInput()){
-		window.location.hash = "game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val();
-		LoadPage("#game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val());
+		var Player2Name = "";
+		if(!$("#pPlayer2").is(':hidden')){
+			Player2Name = "&name2=" + $("#GameName2").val();
+		}
+	
+		window.location.hash = "game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val() + Player2Name;
+		LoadPage("#game?host=" + $("#GameHost").val() + "&key=" + $("#GameKey").val() + "&name=" + $("#GameName").val() + Player2Name);
 	}
 }
 
@@ -88,13 +100,29 @@ function ValidInput(){
 	$("#GameHost").val($("#GameHost").val().replace('=','').replace('&','').replace('?','').replace('#',''));
 	$("#GameKey").val($("#GameKey").val().replace(/[^a-z0-9]/gi,''));
 	$("#GameName").val($("#GameName").val().replace('=','').replace('&','').replace('?','').replace('#',''));
-
+	$("#GameName2").val($("#GameName2").val().replace('=','').replace('&','').replace('?','').replace('#',''));
+	
+	
 	//Prüfen ob alle angeaben gemacht sind
 	if ($("#GameHost").val() == ""){ShowMessage("Bitte geben Sie einen Host an."); return false;}
 	if ($("#GameKey").val() == ""){ShowMessage("Bitte geben Sie einen Key an."); return false;}
 	if ($("#GameName").val() == ""){ShowMessage("Bitte geben Sie Ihren Namen an."); return false;}
 	
+	if(!$("#pPlayer2").is(':hidden')){
+		if ($("#GameName2").val() == ""){ShowMessage("Bitte geben einen Namen für Spieler 2 an."); return false;}
+	}
+	
 	return true;
+}
+
+function ShowPlayer2Input(){
+	if($("#pPlayer2").is(':hidden')){
+		$("#pPlayer2").show();
+	}
+	else {
+		$("#pPlayer2").hide();
+	}
+	
 }
 
 function ShowMessage(mes){

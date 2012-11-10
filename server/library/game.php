@@ -102,11 +102,12 @@ class game {
 	
 	private function Step($config){
 		//Ball bewegen
+		$ballQuarter = ($config->BALL_RADIUS /2);
 		
 		//1. wenn ball ganz rechts ist
 		if(game::$game->ball[0] >= $config->FIELD_WIDTH - $config->BALL_RADIUS - $config->PADDLE_WIDTH){
-			if(game::$game->ball[1] > game::$game->paddleRight - $config->PADDLE_HEIGHT/2 and 
-				game::$game->ball[1] < game::$game->paddleRight + $config->PADDLE_HEIGHT/2){
+			if(game::$game->ball[1] + $ballQuarter  > game::$game->paddleRight - $config->PADDLE_HEIGHT/2 and 
+				game::$game->ball[1] - $ballQuarter < game::$game->paddleRight + $config->PADDLE_HEIGHT/2){
 				//wenn ball an Paddel
 				game::$game->ballDelta[0] = game::$game->ballDelta[0]*(-1);
 				game::$game->ballDelta[1] = game::$game->ballDelta[1] + ((game::$game->ball[1] - game::$game->paddleRight)/ $config->ACCELORATOR);
@@ -126,8 +127,8 @@ class game {
 		
 		//2. wenn ball ganz links ist
 		if(game::$game->ball[0] <= $config->BALL_RADIUS + $config->PADDLE_WIDTH){
-			if(game::$game->ball[1] > game::$game->paddleLeft - $config->PADDLE_HEIGHT/2 and 
-				game::$game->ball[1] < game::$game->paddleLeft + $config->PADDLE_HEIGHT/2){
+			if(game::$game->ball[1] + $ballQuarter > game::$game->paddleLeft - $config->PADDLE_HEIGHT/2 and 
+				game::$game->ball[1] - $ballQuarter < game::$game->paddleLeft + $config->PADDLE_HEIGHT/2){
 				//wenn ball an Paddel
 				game::$game->ballDelta[0] = game::$game->ballDelta[0]*(-1);
 				game::$game->ballDelta[1] = game::$game->ballDelta[1] + ((game::$game->ball[1] - game::$game->paddleLeft)/ $config->ACCELORATOR);
