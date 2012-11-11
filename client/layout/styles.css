@@ -232,3 +232,7 @@ a:ACTIVE, a:HOVER 	{color: #fff;}
 #Player2Legend .down {
 	background-position: -40px 40px;
 }
+
+.bt_center a{
+	margin: 10px auto;
+}

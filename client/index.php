@@ -37,7 +37,7 @@
 			<br/><br/>
 			Falk Müller, 2012
 			<div id="impress">
-				Impressum
+				Impressum <a href="#">Startseite</a> <a href="#info">Information</a>
 				<div id="impress-text">
 					Falk Müller, 04347 Leipzig, pong@leemia.de
 				</div>

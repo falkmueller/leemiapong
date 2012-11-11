@@ -98,6 +98,10 @@ class robot {
 				}
 	}
 	
+/*
+ * die Modulo-Funktion von php, vie %, gibt bei Kommazahlen trotzdem Integer zurück,
+ * diese Funktion wird statt dessen verwendet.
+ */
 private function modulo ( $x, $y ) {
 	$q = $x/$y;
 	$q = (int) $q;
@@ -105,6 +109,9 @@ private function modulo ( $x, $y ) {
 	return $r;
 }
 
+/*
+ * Gibt den Ganzzahligen Wert ohne Rest zurück
+ */
 private function Div ($x, $y){
 	$q = $x/$y;
 	$q = floor( $q );

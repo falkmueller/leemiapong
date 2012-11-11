@@ -33,6 +33,10 @@
 					<strong>gegen einen befreundeten Spieler, am selben PC</strong><br/>
 					Dr&uuml;ckt den Button "2 Spieler". Nun m&uuml;sst Ihr euche Namen angeben und auf "Spiel starten" dr&uuml;cken. Und los gehts.
 				</li>
+				<li>
+					<strong>gegen den Computer spielen</strong><br/>
+					Dr&uuml;ckt den Button "gegen Computer" und das Spiel beginnt.
+				</li>
 			</ul>
 		</li>
 	</ul>

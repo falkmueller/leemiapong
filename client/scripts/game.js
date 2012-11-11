@@ -172,7 +172,7 @@ function UpdateStatus(data){
 	if (data["status"] == "finished"){
 		runStatusLoop = false;
 		var WinPlayerName = (data['scoreLeft'] > data['scoreRight']) ? data['players']['left'] : data['players']['right'];
-		$.blockUI({ message: "Spieler " + WinPlayerName + " hat gewonnen.<br/><div class='bt'><a onclick='restart()'>Neues Spiel</a></div>"});
+		$.blockUI({ message: "Spieler " + WinPlayerName + " hat gewonnen.<br/><div class='bt bt_center'><a onclick='restart()'>Neues Spiel</a></div>"});
 	}
 
 }
