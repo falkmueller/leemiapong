@@ -74,22 +74,25 @@ function FirstStart(){
 
 	/*Tastaturtrigger setzen*/
 	if(!SetKeyTrigger){
-		$(window).keypress(function(event) {return CheckKeyPressEvent(event);});
+		nn=(document.layers)?true:false; 
+		ie=(document.all)?true:false;
+		
+		document.onkeydown=CheckKeyPressEvent; if(nn) document.captureEvents(Event.KEYDOWN);
 		SetKeyTrigger = true;
 		}
+	
 }
 
 /*
  * Tastatureingabe überprüfen und entsprechnede Funktion aufrufen
  */
-function CheckKeyPressEvent(evt){
-			
+function CheckKeyPressEvent(e){
+	
 	/*KeyCode herausfinden*/
-	var keyCode;
-	if (!evt) var evt = window.event
-	if (evt.which) keyCode = evt.which;
-	else if (evt.keyCode) keyCode = evt.keyCode;
+	var evt=(e)?e:(window.event)?window.event:null; 
+	if(evt){ var keyCode=(evt.charCode)?evt.charCode: ((evt.keyCode)?evt.keyCode:((evt.which)?evt.which:0));} 
 
+	
 	if(keyCode == 38){
 		//Key UP
 		paddleUp(1);
@@ -100,11 +103,11 @@ function CheckKeyPressEvent(evt){
 		paddleDown(1);
 		return false;
 	} 
-	else if (keyCode == 119){
+	else if (keyCode == 87){
 		//Letter 'w'
 		paddleUp(2);
 	}
-	else if (keyCode == 115){
+	else if (keyCode == 83){
 		//Letter 's'
 		paddleDown(2);
 	}
