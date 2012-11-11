@@ -24,7 +24,7 @@ class gameObj {
 	//Status des Spiels
 	public $status = NULL;
 	
-	//soll spiel automatisch beginnenm wenn 2 Spieler angemeldet sind
+	//soll Spiel automatisch beginnenm wenn 2 Spieler angemeldet sind
 	public $autoStart = true;
 	
 	//Anzahl der Paddel bewegungen des Linken Spielers
@@ -42,9 +42,10 @@ class gameObj {
 	//Spielstand des Rechten Spielers
 	public $scoreRight = 0;
 	
-	
-	public function __construct(){
-		$config = new configObj();
+	/*
+	 * Setzt Initialisierungskonfiguration
+	 */
+	public function __construct($config){
 			$this->ball = array($config->FIELD_WIDTH / 2 , $config->FIELD_HEIGHT / 2);
 			$this->paddleLeft = $config->FIELD_HEIGHT / 2;
 			$this->paddleRight = $config->FIELD_HEIGHT / 2;
@@ -53,6 +54,9 @@ class gameObj {
 			$this->status = statusEnum::$STATUS_LOGIN;
 	}
 	
+	/*
+	 * Gibt Spiel für Statusabfrage zurück (SecretKeys werden entfernt)
+	 */
 	public function Get(){
 		$returnObj = clone $this;
 		$returnObj->players = array("left" => $this->players["left"]["name"], "right" => $this->players["right"]["name"]);

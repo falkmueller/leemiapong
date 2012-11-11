@@ -1,5 +1,5 @@
 <?php 
-	$Host = WSURL();
+	$Host = WSURL()."/game";
 	$Key= CreateKey();
 
 ?>
@@ -48,6 +48,12 @@
 			Wenn Ihr zu zweit in einem Fenster Spielen wollt, dann dr&uuml;cke den folgenden Button.
 			<div class="bt">
 				<a onclick="ShowPlayer2Input();">2 Spieler</a>
+			</div>
+		</p>
+		<p>
+			Du kannst auch gegen eine kleine KI spielen.
+			<div class="bt">
+				<a onclick="StartGameAgainstRobot();">gegen Computer</a>
 			</div>
 		</p>
 	</div>

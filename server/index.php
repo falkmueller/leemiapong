@@ -1,6 +1,9 @@
 <?php 
-error_reporting(0);
+//error_reporting(0);
 
+/*
+ * Autoloader setzen, damit Anhang des Klassennahmens die Datei geladen wird, welche die Klasse enthält
+ */
 function autoloader($ClassName){
 	$ClassName = str_replace("_", "/", $ClassName);
 	
@@ -43,6 +46,9 @@ if (!function_exists('json_encode')) {
  * #############################################################
  */
 
+/*
+ * Antwort erzeugen und ausgeben
+ */
 $response = new response($_GET["q"]);
 $response->send();
 

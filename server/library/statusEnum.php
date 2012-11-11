@@ -1,5 +1,7 @@
 <?php 
-
+/*
+ * Aufzählung aller möglichen Spielstände
+ */
 class statusEnum {
 	public static $STATUS_LOGIN = 'login';
 	public static $STATUS_READY = 'ready';
